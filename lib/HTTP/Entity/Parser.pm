@@ -9,9 +9,6 @@ use Module::Load;
 
 our $VERSION = "0.01";
 
-# This Parser is based on tokuhirom's code
-# see https://github.com/plack/Plack/pull/434
-
 sub new {
     my $class = shift;
     bless { handlers => [] }, $class;
@@ -251,6 +248,8 @@ it under the same terms as Perl itself.
 Masahiro Nagano E<lt>kazeburo@gmail.comE<gt>
 
 Tokuhiro Matsuno E<lt>tokuhirom@gmail.comE<gt>
+
+This module is based on tokuhirom's code, see L<https://github.com/plack/Plack/pull/434>
 
 =cut
 

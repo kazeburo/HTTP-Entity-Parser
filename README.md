@@ -125,3 +125,5 @@ it under the same terms as Perl itself.
 Masahiro Nagano <kazeburo@gmail.com>
 
 Tokuhiro Matsuno <tokuhirom@gmail.com>
+
+This module is based on tokuhirom's code, see [https://github.com/plack/Plack/pull/434](https://github.com/plack/Plack/pull/434)
