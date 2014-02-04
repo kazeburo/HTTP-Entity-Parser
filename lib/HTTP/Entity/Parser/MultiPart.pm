@@ -122,3 +122,40 @@ sub finalize {
 
 1;
 
+__END__
+
+=encoding utf-8
+
+=head1 NAME
+
+HTTP::Entity::Parser::MultiPart - parser for multipart/form-data
+
+=head1 SYNOPSIS
+
+    use HTTP::Entity::Parser;
+    
+    my $parser = HTTP::Entity::Parser->new;
+    $parser->register('multipart/form-data','HTTP::Entity::Parser::MultiPart');
+
+=head1 DESCRIPTION
+
+This is a parser class for multipart/form-data.
+
+MultiPart parser use L<HTTP::MultiPartParser>.
+
+=head1 LICENSE
+
+Copyright (C) Masahiro Nagano.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
+
+=head1 AUTHOR
+
+Masahiro Nagano E<lt>kazeburo@gmail.comE<gt>
+
+Tokuhiro Matsuno E<lt>tokuhirom@gmail.comE<gt>
+
+=cut
+
+
