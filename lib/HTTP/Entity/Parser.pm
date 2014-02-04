@@ -143,7 +143,7 @@ This module support application/x-www-form-urlencoded, multipart/form-data and a
 
 Create the instance.
 
-=item register($content_type:String, $class:String)
+=item register($content_type:String, $class:String, $opts:HashRef)
 
 Register parser class.
 
