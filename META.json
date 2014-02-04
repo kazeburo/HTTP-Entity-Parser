@@ -1,5 +1,5 @@
 {
-   "abstract" : "It's new $module",
+   "abstract" : "PSGI compliant HTTP Entity Parser",
    "author" : [
       "Masahiro Nagano <kazeburo@gmail.com>"
    ],
@@ -43,15 +43,36 @@
       },
       "runtime" : {
          "requires" : {
+            "Encode" : "0",
+            "File::Temp" : "0",
+            "HTTP::Message" : "6",
+            "HTTP::MultiPartParser" : "0",
+            "JSON" : "2",
+            "Module::load" : "0",
+            "Stream::Buffered" : "0",
             "perl" : "5.008005"
          }
       },
       "test" : {
          "requires" : {
+            "Cwd" : "0",
+            "File::Spec::Functions" : "0",
+            "Hash::MultiValue" : "0",
             "Test::More" : "0.98"
          }
       }
    },
    "release_status" : "unstable",
+   "resources" : {
+      "bugtracker" : {
+         "web" : "https://github.com/kazeburo/HTTP-Entity-Parser/issues"
+      },
+      "homepage" : "https://github.com/kazeburo/HTTP-Entity-Parser",
+      "repository" : {
+         "type" : "git",
+         "url" : "git://github.com/kazeburo/HTTP-Entity-Parser.git",
+         "web" : "https://github.com/kazeburo/HTTP-Entity-Parser"
+      }
+   },
    "version" : "0.01"
 }
