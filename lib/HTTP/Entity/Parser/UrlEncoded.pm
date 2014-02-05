@@ -8,10 +8,10 @@ our %DecodeMap;
 for my $num ( 0 .. 255 ) {
     my $h = sprintf "%02X", $num;
     my $chr = chr $num;
-    $DecodeMap{ lc $h } = $chr;
-    $DecodeMap{ uc $h } = $chr;
-    $DecodeMap{ ucfirst lc $h } = $chr;
-    $DecodeMap{ lcfirst uc $h } = $chr;
+    $DecodeMap{ lc $h } = $chr; #%aa
+    $DecodeMap{ uc $h } = $chr; #%AA
+    $DecodeMap{ ucfirst lc $h } = $chr; #%Aa
+    $DecodeMap{ lcfirst uc $h } = $chr; #%aA
 }
 
 sub new {

@@ -31,6 +31,17 @@ for my $i ( 1..15 ) {
         my $hash = Hash::MultiValue->new(@$params);
         is_deeply([$hash->keys], $results->{param_order}, "[$i] param_order");
         is_deeply($hash->as_hashref_mixed, $results->{param}, "[$i] param");
+
+        my $upload_hash = Hash::MultiValue->new(@$uploads);
+        $upload_hash->each(sub {
+            delete $_[1]->{tempname};
+            my $headers = delete $_[1]->{headers};
+            my %headers = @$headers;
+            $_[1]->{headers} = \%headers;
+        });
+        
+        is_deeply($upload_hash->as_hashref_mixed, $results->{upload} || {}, "[$i] upload");
+
     }
     else {
         ok($@);

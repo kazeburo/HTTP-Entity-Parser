@@ -3,7 +3,6 @@ package HTTP::Entity::Parser::MultiPart;
 use strict;
 use warnings;
 use HTTP::MultiPartParser;
-use HTTP::Headers::Util qw/split_header_words/;
 use File::Temp qw/tempfile/;
 use Carp qw//;
 use Fcntl ":seek";
@@ -41,27 +40,17 @@ sub new {
             (defined $disposition)
                 or die q/Content-Disposition header is missing in part/;
 
-            my ($p) = split_header_words($disposition);
-
-            ($p->[0] eq 'form-data')
-            or die q/Disposition type is not form-data/;
-            use Data::Dumper;
-            my ($name, $filename);
-            for(my $i = 2; $i < @$p; $i += 2) {
-                if    ($p->[$i] eq 'name')     { $name     = $p->[$i + 1] }
-                elsif ($p->[$i] eq 'filename') { $filename = $p->[$i + 1] }
-            }
-
-            (defined $name)
+            my %disposition_param = ($disposition =~ /\b((?:file)?name)="?([^\";]*)"?/g);
+            (exists $disposition_param{name} && length $disposition_param{name} > 0 )
                 or die q/Parameter 'name' is missing from Content-Disposition header/;
 
             $part = {
-                name    => $name,
+                name    => $disposition_param{name},
                 headers => $headers,
             };
 
-            if (defined $filename) {
-                $part->{filename} = $filename;
+            if ( exists $disposition_param{filename}) {
+                $part->{filename} = $disposition_param{filename};
                 my ($tempfh, $tempname) = tempfile(UNLINK => 1);
                 $part->{fh} = $tempfh;
                 $part->{tempname} = $tempname;
@@ -77,13 +66,14 @@ sub new {
             if ($fh) {
                 print $fh $chunk
                     or die qq/Could not write to file handle: '$!'/;
-                if ($final) {
+                if ($final && $part->{filename} ne "" ) {
                     seek($fh, 0, SEEK_SET)
                         or die qq/Could not rewind file handle: '$!'/;
 
                     my @headers = map { split(/\s*:\s*/, $_, 2) }
                         @{$part->{headers}};
                     push @uploads, $part->{name}, {
+                        name     => $part->{name},
                         headers  => \@headers,
                         size     => -s $part->{fh},
                         filename => $part->{filename},
@@ -93,7 +83,6 @@ sub new {
             } else {
                 $part->{data} .= $chunk;
                 if ($final) {
-
                     push @params, $part->{name}, $part->{data};
                 }
             }
