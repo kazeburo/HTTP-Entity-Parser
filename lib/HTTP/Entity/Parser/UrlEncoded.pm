@@ -30,13 +30,13 @@ sub finalize {
     my $self = shift;
     my @params;
     for my $pair ( split( /[&;] ?/, $self->{buffer}, -1 ) ) {
+        $pair =~ y/\+/\x20/;
         my ($key, $val) = split /=/, $pair, 2;
         for ($key, $val) {
             if ( ! defined $_ ) { 
                 push @params, '';
                 next;
             }
-            s/\+/\x20/gs;
             s/$DECODE/$DecodeMap{$1}/gs;
             push @params, $_;
         }
