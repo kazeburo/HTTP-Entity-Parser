@@ -21,7 +21,7 @@ HTTP::Entity::Parser - PSGI compliant HTTP Entity Parser
 
 HTTP::Entity::Parser is PSGI compliant HTTP Entity parser. This module also has compatibility 
 with [HTTP::Body](http://search.cpan.org/perldoc?HTTP::Body). Unlike HTTP::Body, HTTP::Entity::Parser reads HTTP entity from 
-PSGI's env `$env-`{'psgi.input'}> and parse it.
+PSGI's env `$env->{'psgi.input'}` and parse it.
 This module support application/x-www-form-urlencoded, multipart/form-data and application/json.
 
 

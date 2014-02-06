@@ -74,5 +74,8 @@
          "web" : "https://github.com/kazeburo/HTTP-Entity-Parser"
       }
    },
-   "version" : "0.01"
+   "version" : "0.01",
+   "x_contributors" : [
+      "moznion <moznion@gmail.com>"
+   ]
 }
