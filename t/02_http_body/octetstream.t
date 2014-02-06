@@ -13,7 +13,7 @@ for my $i ( 1..3 ) {
     my $test    = sprintf( "%03d", $i );
 
     my $headers = paml_loadfile( catfile( $path, "$test-headers.pml" ) );
-    my $content = IO::File->new( catfile( $path, "$test-content.dat" ) );
+    open(my $content, '<:unix',catfile( $path, "$test-content.dat" ) );
     my $results = slurp( catfile( $path, "$test-results.dat" ) );
     my $env = build_env($headers, $content);
 
