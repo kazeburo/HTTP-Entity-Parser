@@ -10,7 +10,7 @@ our @EXPORT = qw/slurp paml_loadfile build_env/;
 
 sub slurp {
     my $file = shift;
-    open my $fh, "<", $file or die "$!";
+    open my $fh, "<:unix", $file or die "$!";
     scalar do { local $/; <$fh> };
 }
 
