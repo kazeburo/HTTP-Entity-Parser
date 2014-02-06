@@ -2,6 +2,12 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.02 2014-02-06T02:34:25Z
+
+    - fix test on Windows #2 (Thank you chorny)
+      use :unix perlio
+    - fix a document bug (Thank you moznion)
+
 0.01 2014-02-05T02:00:47Z
 
     - original version
