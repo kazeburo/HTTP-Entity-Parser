@@ -33,9 +33,9 @@ cmpthese(timethese(-1, {
 
 __END__
 Benchmark: running http_body, http_entity for at least 1 CPU seconds...
- http_body:  1 wallclock secs ( 1.08 usr +  0.00 sys =  1.08 CPU) @ 36201.85/s (n=39098)
-http_entity:  1 wallclock secs ( 1.10 usr +  0.01 sys =  1.11 CPU) @ 51661.26/s (n=57344)
+ http_body:  1 wallclock secs ( 1.08 usr +  0.00 sys =  1.08 CPU) @ 14339.81/s (n=15487)
+http_entity:  2 wallclock secs ( 1.10 usr +  0.00 sys =  1.10 CPU) @ 65162.73/s (n=71679)
                Rate   http_body http_entity
-http_body   36202/s          --        -30%
-http_entity 51661/s         43%          --
+http_body   14340/s          --        -78%
+http_entity 65163/s        354%          --
 
