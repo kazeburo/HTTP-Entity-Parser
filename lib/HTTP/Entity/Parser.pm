@@ -184,12 +184,12 @@ C<$uploads> is ArrayRef of HashRef.
 use with Plack::Request::Upload
 
    my ( $params, $uploads) = $parser->parse($env);
-   my $upload = Hash::MultiValue->new();
-   for my $obj ( @$uploads ) {
-       my %copy = %$obj;
-       $copy{headers} = HTTP::Headers->new(%{$obj->{headers}});
-       $upload->add($$copy->{name}, Plack::Request::Upload->new(%copy));
-   }
+    my $upload_hmv = Hash::MultiValue->new();
+    while ( my ($k,$v) = splice @$uploads, 0, 2 ) {
+        my %copy = %$v;
+        $copy{headers} = HTTP::Headers::Fast->new(@{$v->{headers}});
+        $upload_hmv->add($k, Plack::Request::Upload->new(%copy));
+    }
 
 =back
 
