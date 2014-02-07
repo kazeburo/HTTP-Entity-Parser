@@ -25,7 +25,8 @@ sub get_parser {
 
     if (defined $env->{CONTENT_TYPE}) {
         for my $handler (@{$self->{handlers}}) {
-            if (index($env->{CONTENT_TYPE}, $handler->[0]) == 0) {
+            if ( $env->{CONTENT_TYPE} eq $handler->[0] 
+              || index($env->{CONTENT_TYPE}, $handler->[0]) == 0) {
                 return $handler->[1]->new($env, $handler->[2]);
             }
         }

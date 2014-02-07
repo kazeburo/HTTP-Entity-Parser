@@ -2,48 +2,23 @@ package HTTP::Entity::Parser::UrlEncoded;
 
 use strict;
 use warnings;
-
-our $DECODE = qr/%([0-9a-fA-F]{2})/;
-our %DecodeMap;
-for my $num ( 0 .. 255 ) {
-    my $h = sprintf "%02X", $num;
-    my $chr = chr $num;
-    $DecodeMap{ lc $h } = $chr; #%aa
-    $DecodeMap{ uc $h } = $chr; #%AA
-    $DecodeMap{ ucfirst lc $h } = $chr; #%Aa
-    $DecodeMap{ lcfirst uc $h } = $chr; #%aA
-}
+use WWW::Form::UrlEncoded qw/parse_urlencoded/;
 
 sub new {
-    my $class = shift;
-    bless { buffer => '' }, $class;
+    bless [''], shift;
 }
 
 sub add {
     my $self = shift;
     if (defined $_[0]) {
-        $self->{buffer} .= $_[0];
+        $self->[0] .= $_[0];
     }
 }
 
 sub finalize {
-    my $self = shift;
-    my @params;
-    for my $pair ( split( /[&;] ?/, $self->{buffer}, -1 ) ) {
-        $pair =~ y/\+/\x20/;
-        my ($key, $val) = split /=/, $pair, 2;
-        for ($key, $val) {
-            if ( ! defined $_ ) { 
-                push @params, '';
-                next;
-            }
-            s/$DECODE/$DecodeMap{$1}/gs;
-            push @params, $_;
-        }
-    }
-
-    return (\@params, []);
+    return ([parse_urlencoded($_[0]->[0])], []);
 }
+
 
 1;
 __END__
@@ -52,7 +27,7 @@ __END__
 
 =head1 NAME
 
-HTTP::Entity::Parser::MultiPart - parser for application/x-www-form-urlencoded
+HTTP::Entity::Parser::UrlEncoded - parser for application/x-www-form-urlencoded
 
 =head1 SYNOPSIS
 

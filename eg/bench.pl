@@ -6,7 +6,7 @@ use HTTP::Entity::Parser;
 use HTTP::Body;
 use Benchmark qw/:all/;
 
-my $content = 'xxx=hogehoge&yyy=aaaaaaaaaaaaaaaaaaaaa';
+my $content = 'xxx=hogehoge&yyy=aaaaaaaaaaaaaaaaaaaaa&%E6%97%A5%E6%9C%AC%E8%AA%9E=%E3%81%AB%E3%81%BB%E3%82%93%E3%81%94&%E3%81%BB%E3%81%92%E3%81%BB%E3%81%92=%E3%81%B5%E3%81%8C%E3%81%B5%E3%81%8C';
 
 my $parser = HTTP::Entity::Parser->new;
 $parser->register('application/x-www-form-urlencoded','HTTP::Entity::Parser::UrlEncoded');
