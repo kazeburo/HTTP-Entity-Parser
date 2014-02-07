@@ -2,6 +2,10 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.04 2014-02-07T08:05:16Z
+
+    - fix a documentation bug about Plack::Request::Upload
+
 0.03 2014-02-07T07:09:03Z
 
     - use WWW::Form::UrlEncoded for parsing POST data
