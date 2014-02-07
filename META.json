@@ -49,6 +49,7 @@
             "JSON" : "2",
             "Module::Load" : "0",
             "Stream::Buffered" : "0",
+            "WWW::Form::UrlEncoded" : "0",
             "perl" : "5.008005"
          }
       },
