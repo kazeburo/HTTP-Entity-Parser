@@ -231,9 +231,13 @@ HTTP::Entity::Parser is able to choose parsers by the instance, HTTP::Body requi
 
 =item L<HTTP::Body>
 
-=item L<HTTP::MultiPartParser>.
+=item L<HTTP::MultiPartParser>
 
 =item L<Plack::Request>
+
+=item L<WWW::Form::UrlEncoded>
+
+HTTP::Entity::Parser uses this for parse application/x-www-form-urlencoded
 
 =back
 
