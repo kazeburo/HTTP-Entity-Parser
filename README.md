@@ -110,8 +110,11 @@ HTTP::Entity::Parser is able to choose parsers by the instance, HTTP::Body requi
 # SEE ALSO
 
 - [HTTP::Body](http://search.cpan.org/perldoc?HTTP::Body)
-- [HTTP::MultiPartParser](http://search.cpan.org/perldoc?HTTP::MultiPartParser).
+- [HTTP::MultiPartParser](http://search.cpan.org/perldoc?HTTP::MultiPartParser)
 - [Plack::Request](http://search.cpan.org/perldoc?Plack::Request)
+- [WWW::Form::UrlEncoded](http://search.cpan.org/perldoc?WWW::Form::UrlEncoded)
+
+    HTTP::Entity::Parser uses this for parse application/x-www-form-urlencoded
 
 # LICENSE
 
