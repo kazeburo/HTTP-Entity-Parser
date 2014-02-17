@@ -51,6 +51,9 @@
             "Stream::Buffered" : "0",
             "WWW::Form::UrlEncoded" : "0.10",
             "perl" : "5.008005"
+         },
+         "suggests" : {
+            "WWW::Form::UrlEncoded::XS" : "0.10"
          }
       },
       "test" : {
