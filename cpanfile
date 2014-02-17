@@ -5,7 +5,7 @@ requires 'JSON' => '2';
 requires 'Encode';
 requires 'HTTP::MultiPartParser';
 requires 'File::Temp';
-requires 'WWW::Form::UrlEncoded';
+requires 'WWW::Form::UrlEncoded', '0.10';
 
 on 'test' => sub {
     requires 'Test::More', '0.98';
