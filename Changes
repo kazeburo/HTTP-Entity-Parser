@@ -2,6 +2,10 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.05 2014-02-17T07:00:27Z
+
+    - requires WWW::Form::UrlEncoded >= 0.10  that does not use xs
+
 0.04 2014-02-07T08:05:16Z
 
     - fix a documentation bug about Plack::Request::Upload
