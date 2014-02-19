@@ -2,6 +2,10 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.11 2014-02-19T15:38:51Z
+
+    - cache loaded parser and tune a bit
+
 0.10 2014-02-19T06:29:13Z
 
     - requires WWW::Form::UrlEncoded >= 0.13 for backward compatibility
