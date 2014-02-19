@@ -4,8 +4,7 @@ use strict;
 use warnings;
 
 sub new {
-    my $class = shift;
-    bless {}, $class;
+    bless [], $_[0];
 }
 
 sub add { }

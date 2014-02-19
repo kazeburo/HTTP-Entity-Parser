@@ -12,8 +12,8 @@ my $content2 = 'xxx=hogehoge&yyy=aaaaaaaaaaaaaaaaaaaaa&%E6%97%A5%E6%9C%AC%E8%AA%
 
 my $content3 = join '&', map { "$_=%E3%81%B5%E3%81%8C%E3%81%B5%E3%81%8C%E3%81%B5%E3%81%8C%E3%81%B5%E3%81%8C%E3%81%B5%E3%81%8C%E3%81%B5%E3%81%8C" } 'A'..'R';
 
-    my $parser = HTTP::Entity::Parser->new;
-    $parser->register('application/x-www-form-urlencoded','HTTP::Entity::Parser::UrlEncoded');
+my $parser = HTTP::Entity::Parser->new;
+$parser->register('application/x-www-form-urlencoded','HTTP::Entity::Parser::UrlEncoded');
 
 for my $content ($content1, $content2, $content3) {
     print "\n## content length => ", length($content) . "\n\n";
@@ -43,26 +43,26 @@ __END__
 ## content length => 38
 
 Benchmark: running http_body, http_entity for at least 1 CPU seconds...
- http_body:  1 wallclock secs ( 1.08 usr +  0.00 sys =  1.08 CPU) @ 36201.85/s (n=39098)
-http_entity:  1 wallclock secs ( 1.12 usr +  0.00 sys =  1.12 CPU) @ 76799.11/s (n=86015)
+ http_body:  1 wallclock secs ( 1.02 usr +  0.00 sys =  1.02 CPU) @ 34132.35/s (n=34815)
+http_entity:  1 wallclock secs ( 1.08 usr +  0.00 sys =  1.08 CPU) @ 79643.52/s (n=86015)
                Rate   http_body http_entity
-http_body   36202/s          --        -53%
-http_entity 76799/s        112%          --
+http_body   34132/s          --        -57%
+http_entity 79644/s        133%          --
 
 ## content length => 177
 
 Benchmark: running http_body, http_entity for at least 1 CPU seconds...
- http_body:  1 wallclock secs ( 1.11 usr +  0.00 sys =  1.11 CPU) @ 14901.80/s (n=16541)
-http_entity:  1 wallclock secs ( 1.08 usr +  0.00 sys =  1.08 CPU) @ 64474.07/s (n=69632)
+ http_body:  2 wallclock secs ( 1.17 usr +  0.00 sys =  1.17 CPU) @ 14137.61/s (n=16541)
+http_entity:  1 wallclock secs ( 1.06 usr +  0.00 sys =  1.06 CPU) @ 67621.70/s (n=71679)
                Rate   http_body http_entity
-http_body   14902/s          --        -77%
-http_entity 64474/s        333%          --
+http_body   14138/s          --        -79%
+http_entity 67622/s        378%          --
 
 ## content length => 1997
 
 Benchmark: running http_body, http_entity for at least 1 CPU seconds...
- http_body:  1 wallclock secs ( 1.16 usr +  0.00 sys =  1.16 CPU) @ 1930.17/s (n=2239)
-http_entity:  1 wallclock secs ( 1.11 usr +  0.00 sys =  1.11 CPU) @ 29519.82/s (n=32767)
+ http_body:  1 wallclock secs ( 1.09 usr +  0.00 sys =  1.09 CPU) @ 2054.13/s (n=2239)
+http_entity:  2 wallclock secs ( 1.13 usr +  0.00 sys =  1.13 CPU) @ 29276.99/s (n=33083)
                Rate   http_body http_entity
-http_body    1930/s          --        -93%
-http_entity 29520/s       1429%          --
+http_body    2054/s          --        -93%
+http_entity 29277/s       1325%          --

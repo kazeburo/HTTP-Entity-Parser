@@ -4,46 +4,56 @@ use 5.008005;
 use strict;
 use warnings;
 use Stream::Buffered;
-use HTTP::Entity::Parser::OctetStream;
 use Module::Load;
 
 our $VERSION = "0.10";
 
+our %LOADED;
+our @DEFAULT_PARSER = qw/
+    OctetStream
+    UrlEncoded
+    MultiPart
+    JSON
+/;
+for my $parser ( @DEFAULT_PARSER ) {
+    load "HTTP::Entity::Parser::".$parser;
+    $LOADED{"HTTP::Entity::Parser::".$parser} = 1;
+}
+
 sub new {
-    my $class = shift;
-    bless { handlers => [] }, $class;
+    bless [ [] ], $_[0];
 }
 
 sub register {
-    my ($self, $content_type, $klass, $opts) = @_;
-    load $klass;
-    push @{$self->{handlers}}, [$content_type, $klass, $opts];
-}
-
-sub get_parser {
-    my ($self, $env) = @_;
-
-    if (defined $env->{CONTENT_TYPE}) {
-        for my $handler (@{$self->{handlers}}) {
-            if ( $env->{CONTENT_TYPE} eq $handler->[0] 
-              || index($env->{CONTENT_TYPE}, $handler->[0]) == 0) {
-                return $handler->[1]->new($env, $handler->[2]);
-            }
-        }
+    my ($self,$content_type, $klass, $opts) = @_;
+    if ( !$LOADED{$klass} ) {
+        load $klass;
+        $LOADED{$klass} = 1;
     }
-    return HTTP::Entity::Parser::OctetStream->new();
+    push @{$self->[0]}, [$content_type, $klass, $opts];
 }
 
 sub parse {
     my ($self, $env) = @_;
-
-    my $parser = $self->get_parser($env);
 
     my $ct = $env->{CONTENT_TYPE};
     if (!$ct) {
         # No Content-Type
         return ([], []);
     }
+
+    my $parser;
+    for my $handler (@{$self->[0]}) {
+        if ( $ct eq $handler->[0] || index($ct, $handler->[0]) == 0) {
+            $parser = $handler->[1]->new($env, $handler->[2]);
+            last;
+        }
+    }
+    
+    if ( !$parser ) {
+        $parser = HTTP::Entity::Parser::OctetStream->new();
+    }
+
 
     my $input = $env->{'psgi.input'};
 

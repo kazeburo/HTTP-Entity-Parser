@@ -5,7 +5,7 @@ use warnings;
 use WWW::Form::UrlEncoded qw/parse_urlencoded/;
 
 sub new {
-    bless [''], shift;
+    bless [''], $_[0];
 }
 
 sub add {

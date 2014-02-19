@@ -6,19 +6,20 @@ use JSON qw//;
 use Encode qw/encode_utf8/;
 
 sub new {
-    my $class = shift;
-    bless {buffer => ''}, $class;
+    bless [''], $_[0];
 }
 
 sub add {
     my $self = shift;
-    $self->{buffer} .= $_[0] if defined $_[0];
+    if (defined $_[0]) {
+        $self->[0] .= $_[0];
+    }
 }
 
 sub finalize {
     my $self = shift;
 
-    my $p = JSON::decode_json($self->{buffer});
+    my $p = JSON::decode_json($self->[0]);
     my @params;
     if (ref $p eq 'HASH') {
         while (my ($k, $v) = each %$p) {
