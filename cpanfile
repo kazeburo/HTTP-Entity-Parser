@@ -5,9 +5,9 @@ requires 'JSON' => '2';
 requires 'Encode';
 requires 'HTTP::MultiPartParser';
 requires 'File::Temp';
-requires 'WWW::Form::UrlEncoded', '0.10';
+requires 'WWW::Form::UrlEncoded', '0.13';
 
-suggests 'WWW::Form::UrlEncoded::XS', '0.10';
+suggests 'WWW::Form::UrlEncoded::XS', '0.13';
 
 on 'test' => sub {
     requires 'Test::More', '0.98';
