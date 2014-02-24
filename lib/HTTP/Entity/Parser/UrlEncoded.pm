@@ -2,7 +2,7 @@ package HTTP::Entity::Parser::UrlEncoded;
 
 use strict;
 use warnings;
-use WWW::Form::UrlEncoded qw/parse_urlencoded/;
+use WWW::Form::UrlEncoded qw/parse_urlencoded_arrayref/;
 
 sub new {
     bless [''], $_[0];
@@ -16,7 +16,7 @@ sub add {
 }
 
 sub finalize {
-    return ([parse_urlencoded($_[0]->[0])], []);
+    return (parse_urlencoded_arrayref($_[0]->[0]), []);
 }
 
 
