@@ -49,11 +49,11 @@
             "JSON" : "2",
             "Module::Load" : "0",
             "Stream::Buffered" : "0",
-            "WWW::Form::UrlEncoded" : "0.13",
+            "WWW::Form::UrlEncoded" : "0.17",
             "perl" : "5.008005"
          },
          "suggests" : {
-            "WWW::Form::UrlEncoded::XS" : "0.13"
+            "WWW::Form::UrlEncoded::XS" : "0.17"
          }
       },
       "test" : {
