@@ -2,6 +2,10 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.12 2014-02-24T14:05:33Z
+
+    - use parse_urlencoded_arrayref. requires WWW::Form::UrlEncoded >= 0.17
+
 0.11 2014-02-19T15:38:51Z
 
     - cache loaded parser and tune a bit

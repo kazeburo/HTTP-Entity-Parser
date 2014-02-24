@@ -6,7 +6,7 @@ use warnings;
 use Stream::Buffered;
 use Module::Load;
 
-our $VERSION = "0.11";
+our $VERSION = "0.12";
 
 our %LOADED;
 our @DEFAULT_PARSER = qw/
