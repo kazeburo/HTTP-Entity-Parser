@@ -49,7 +49,7 @@ sub parse {
             last;
         }
     }
-    
+
     if ( !$parser ) {
         $parser = HTTP::Entity::Parser::OctetStream->new();
     }
@@ -74,7 +74,6 @@ sub parse {
             $cl -= $read;
             $parser->add($chunk);
             $buffer->print($chunk) if $buffer;
-            
             if ($read == 0 && $spin++ > 2000) {
                 Carp::croak "Bad Content-Length: maybe client disconnect? ($cl bytes remaining)";
             }
@@ -99,7 +98,7 @@ sub parse {
                 $parser->add($loaded);
                 $buffer->print($loaded);
                 $chunk_buffer =~ s/^\015\012//;
-                $length += $chunk_len;                        
+                $length += $chunk_len;
             }
         }
         $env->{CONTENT_LENGTH} = $length;

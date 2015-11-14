@@ -6,7 +6,6 @@ HTTP::Entity::Parser - PSGI compliant HTTP Entity Parser
 
     use HTTP::Entity::Parser;
     
-
     my $parser = HTTP::Entity::Parser->new;
     $parser->register('application/x-www-form-urlencoded','HTTP::Entity::Parser::UrlEncoded');
     $parser->register('multipart/form-data','HTTP::Entity::Parser::MultiPart');
@@ -20,11 +19,9 @@ HTTP::Entity::Parser - PSGI compliant HTTP Entity Parser
 # DESCRIPTION
 
 HTTP::Entity::Parser is PSGI compliant HTTP Entity parser. This module also has compatibility 
-with [HTTP::Body](http://search.cpan.org/perldoc?HTTP::Body). Unlike HTTP::Body, HTTP::Entity::Parser reads HTTP entity from 
+with [HTTP::Body](https://metacpan.org/pod/HTTP::Body). Unlike HTTP::Body, HTTP::Entity::Parser reads HTTP entity from 
 PSGI's env `$env->{'psgi.input'}` and parse it.
 This module support application/x-www-form-urlencoded, multipart/form-data and application/json.
-
-
 
 # METHODS
 
@@ -93,7 +90,7 @@ This module support application/x-www-form-urlencoded, multipart/form-data and a
 
     For `multipart/form-data`. It is used for HTTP POST contains file upload.
 
-    MultiPart parser use [HTTP::MultiPartParser](http://search.cpan.org/perldoc?HTTP::MultiPartParser).
+    MultiPart parser use [HTTP::MultiPartParser](https://metacpan.org/pod/HTTP::MultiPartParser).
 
 - JSON
 
@@ -109,10 +106,10 @@ HTTP::Entity::Parser is able to choose parsers by the instance, HTTP::Body requi
 
 # SEE ALSO
 
-- [HTTP::Body](http://search.cpan.org/perldoc?HTTP::Body)
-- [HTTP::MultiPartParser](http://search.cpan.org/perldoc?HTTP::MultiPartParser)
-- [Plack::Request](http://search.cpan.org/perldoc?Plack::Request)
-- [WWW::Form::UrlEncoded](http://search.cpan.org/perldoc?WWW::Form::UrlEncoded)
+- [HTTP::Body](https://metacpan.org/pod/HTTP::Body)
+- [HTTP::MultiPartParser](https://metacpan.org/pod/HTTP::MultiPartParser)
+- [Plack::Request](https://metacpan.org/pod/Plack::Request)
+- [WWW::Form::UrlEncoded](https://metacpan.org/pod/WWW::Form::UrlEncoded)
 
     HTTP::Entity::Parser uses this for parse application/x-www-form-urlencoded
 

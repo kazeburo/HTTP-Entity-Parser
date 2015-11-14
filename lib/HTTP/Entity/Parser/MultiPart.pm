@@ -23,6 +23,12 @@ sub new {
     }
     my $boundary = $1;
 
+    my $template = File::Spec->catdir(File::Spec->tmpdir, "HTTP-Entity-Parser-MultiPart-XXXXX");
+    my $dir = File::Temp->newdir($template, CLEANUP => 1);
+    # Temporary dir will remove after the request.
+    push @{$env->{'http.entity.parser.multipart.tempdir'}}, $dir;
+    $self->{tempdir} = "$dir";
+
     my $part;
     my $parser = HTTP::MultiPartParser->new(
         boundary => $boundary,
@@ -51,12 +57,9 @@ sub new {
 
             if ( exists $disposition_param{filename}) {
                 $part->{filename} = $disposition_param{filename};
-                my ($tempfh, $tempname) = tempfile(UNLINK => 1);
+                my ($tempfh, $tempname) = tempfile(UNLINK => 0, DIR => $self->{tempdir});
                 $part->{fh} = $tempfh;
                 $part->{tempname} = $tempname;
-                # Save temporary files to $env.
-                # Temporary files will remove after the request.
-                push @{$env->{'http.entity.parser.multipart.filehandles'}}, $part->{fh};
             }
         },
         on_body => sub {
