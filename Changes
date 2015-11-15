@@ -2,6 +2,10 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.13 2015-11-15T06:22:36Z
+
+    - create tempdir for store upload data
+
 0.12 2014-02-24T14:05:33Z
 
     - use parse_urlencoded_arrayref. requires WWW::Form::UrlEncoded >= 0.17
