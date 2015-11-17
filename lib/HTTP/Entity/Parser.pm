@@ -8,7 +8,7 @@ use Module::Load;
 
 our $VERSION = "0.14";
 
-our $READ_BUF_SIZE = 16384;
+our $BUFFER_LENGTH = 16384;
 
 our %LOADED;
 our @DEFAULT_PARSER = qw/
@@ -23,7 +23,12 @@ for my $parser ( @DEFAULT_PARSER ) {
 }
 
 sub new {
-    bless [ [] ], $_[0];
+    my $class = shift;
+    my %args = (
+        buffer_length => $BUFFER_LENGTH,
+        @_,
+    );
+    bless [ [], $args{buffer_length} ], $class;
 }
 
 sub register {
@@ -38,6 +43,7 @@ sub register {
 sub parse {
     my ($self, $env) = @_;
 
+    my $buffer_length = $self->[1];
     my $ct = $env->{CONTENT_TYPE};
     if (!$ct) {
         # No Content-Type
@@ -71,7 +77,7 @@ sub parse {
     if ( my $cl = $env->{CONTENT_LENGTH} ) {
         my $spin = 0;
         while ($cl > 0) {
-            $input->read(my $chunk, $cl < $READ_BUF_SIZE ? $cl : $READ_BUF_SIZE);
+            $input->read(my $chunk, $cl < $buffer_length ? $cl : $buffer_length);
             my $read = length $chunk;
             $cl -= $read;
             $parser->add($chunk);
@@ -85,7 +91,7 @@ sub parse {
         my $chunk_buffer = '';
         my $length;
         DECHUNK: while(1) {
-            $input->read(my $chunk, $READ_BUF_SIZE);
+            $input->read(my $chunk, $buffer_length);
             $chunk_buffer .= $chunk;
             while ( $chunk_buffer =~ s/^(([0-9a-fA-F]+).*\015\012)// ) {
                 my $trailer   = $1;
@@ -151,9 +157,17 @@ This module support application/x-www-form-urlencoded, multipart/form-data and a
 
 =over 4
 
-=item new()
+=item new( buffer_length => $length:Intger)
 
 Create the instance.
+
+=over 4
+
+=item buffer_length
+
+buffer length, HTTP::Entity::Parser read from psgi.input. 16384 by default.
+
+=back
 
 =item register($content_type:String, $class:String, $opts:HashRef)
 

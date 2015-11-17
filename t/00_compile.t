@@ -9,5 +9,9 @@ use_ok $_ for qw(
     HTTP::Entity::Parser::UrlEncoded
 );
 
+my $parser = HTTP::Entity::Parser->new(buffer_length => 100);
+ok($parser);
+is($parser->[1],100);
+
 done_testing;
 

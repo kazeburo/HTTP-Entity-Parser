@@ -25,9 +25,13 @@ This module support application/x-www-form-urlencoded, multipart/form-data and a
 
 # METHODS
 
-- new()
+- new( buffer\_length => $length:Intger)
 
     Create the instance.
+
+    - buffer\_length
+
+        buffer length, HTTP::Entity::Parser read from psgi.input. 16384 by default.
 
 - register($content\_type:String, $class:String, $opts:HashRef)
 
