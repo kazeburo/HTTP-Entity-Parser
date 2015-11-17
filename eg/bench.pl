@@ -29,7 +29,7 @@ for my $content ($content1, $content2, $content3) {
         'http_body' => sub {
             open my $input, '<', \$content;
             my $body   = HTTP::Body->new( 'application/x-www-form-urlencoded', length($content) );
-            $input->read( my $buffer, 8192);
+            $input->read( my $buffer, 16384);
             $body->add($buffer);
             $body->param;
         }

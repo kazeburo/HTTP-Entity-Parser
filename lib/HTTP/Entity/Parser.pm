@@ -8,6 +8,8 @@ use Module::Load;
 
 our $VERSION = "0.13";
 
+our $READ_BUF_SIZE = 16384;
+
 our %LOADED;
 our @DEFAULT_PARSER = qw/
     OctetStream
@@ -69,7 +71,7 @@ sub parse {
     if ( my $cl = $env->{CONTENT_LENGTH} ) {
         my $spin = 0;
         while ($cl > 0) {
-            $input->read(my $chunk, $cl < 8192 ? $cl : 8192);
+            $input->read(my $chunk, $cl < $READ_BUF_SIZE ? $cl : $READ_BUF_SIZE);
             my $read = length $chunk;
             $cl -= $read;
             $parser->add($chunk);
@@ -83,7 +85,7 @@ sub parse {
         my $chunk_buffer = '';
         my $length;
         DECHUNK: while(1) {
-            $input->read(my $chunk, 8192);
+            $input->read(my $chunk, $READ_BUF_SIZE);
             $chunk_buffer .= $chunk;
             while ( $chunk_buffer =~ s/^(([0-9a-fA-F]+).*\015\012)// ) {
                 my $trailer   = $1;
