@@ -2,6 +2,11 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.15 2015-11-17T05:31:45Z
+
+   - [INCOMPATIBLE CHANGE from 0.14] make buffer length configurable perl instance
+   - increase buffer length to 64k
+
 0.14 2015-11-17T01:29:43Z
 
     - make buffer length configurable
