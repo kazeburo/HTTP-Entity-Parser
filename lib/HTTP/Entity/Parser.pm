@@ -8,7 +8,7 @@ use Module::Load;
 
 our $VERSION = "0.14";
 
-our $BUFFER_LENGTH = 16384;
+our $BUFFER_LENGTH = 65536;
 
 our %LOADED;
 our @DEFAULT_PARSER = qw/
