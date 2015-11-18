@@ -7,6 +7,51 @@ use File::Temp qw/tempfile/;
 use Carp qw//;
 use Fcntl ":seek";
 
+#
+# copy from https://gist.github.com/chansen/7163968
+#
+sub extract_form_data {
+    local $_ = shift;
+    # Fast exit for common form-data disposition
+    if (/\A form-data; \s name="((?:[^"]|\\")*)" (?: ;\s filename="((?:[^"]|\\")*)" )? \z/x) {
+        return ($1, $2);
+    }
+
+    # disposition type must be form-data
+    s/\A \s* form-data \s* ; //xi
+      or return;
+
+    my (%p, $k, $v);
+    while (length) {
+        s/ ^ \s+   //x;
+        s/   \s+ $ //x;
+
+        # skip empty parameters and unknown tokens
+        next if s/^ [^\s"=;]* \s* ; //x;
+
+        # parameter name (token)
+        s/^ ([^\s"=;]+) \s* = \s* //x
+          or return;
+        $k = lc $1;
+        # quoted parameter value
+        if (s/^ "((?:[^"]|\\")*)" \s* (?: ; | $) //x) {
+            $v = $1;
+        }
+        # unquoted parameter value (token)
+        elsif (s/^ ([^\s";]*) \s* (?: ; | $) //x) {
+            $v = $1;
+        }
+        else {
+            return;
+        }
+        if ($k eq 'name' || $k eq 'filename') {
+            return () if exists $p{$k};
+            $p{$k} = $v;
+        }
+    }
+    return exists $p{name} ? @p{qw(name filename)} : ();
+}
+
 sub new {
     my ($class, $env, $opts) = @_;
 
@@ -41,17 +86,17 @@ sub new {
             (defined $disposition)
                 or die q/Content-Disposition header is missing in part/;
 
-            my %disposition_param = ($disposition =~ /\b((?:file)?name)="?([^\";]*)"?/g);
-            (exists $disposition_param{name} && length $disposition_param{name} > 0 )
+            my ($disposition_name, $disposition_filename) = extract_form_data($disposition);
+            defined $disposition_name
                 or die q/Parameter 'name' is missing from Content-Disposition header/;
 
             $part = {
-                name    => $disposition_param{name},
+                name    => $disposition_name,
                 headers => $headers,
             };
 
-            if ( exists $disposition_param{filename}) {
-                $part->{filename} = $disposition_param{filename};
+            if ( defined $disposition_filename ) {
+                $part->{filename} = $disposition_filename;
                 $self->{tempdir} ||= do {
                     my $template = File::Spec->catdir(File::Spec->tmpdir, "HTTP-Entity-Parser-MultiPart-XXXXX");
                     my $dir = File::Temp->newdir($template, CLEANUP => 1);
@@ -72,7 +117,7 @@ sub new {
             if ($fh) {
                 print $fh $chunk
                     or die qq/Could not write to file handle: '$!'/;
-                if ($final && $part->{filename} ne "" ) {
+                if ($final && $part->{filename} ne "" ) { # compatible with HTTP::Body
                     seek($fh, 0, SEEK_SET)
                         or die qq/Could not rewind file handle: '$!'/;
 
