@@ -2,6 +2,10 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.16 2015-11-18T05:20:09Z
+
+   - add chansen's Content-Disposition header parser and test
+
 0.15 2015-11-17T05:31:45Z
 
    - [INCOMPATIBLE CHANGE from 0.14] make buffer length configurable perl instance
