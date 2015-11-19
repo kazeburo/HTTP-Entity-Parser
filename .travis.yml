@@ -1,4 +1,6 @@
 language: perl
+install:
+  - cpanm --mirror http://cpan.cpantesters.org/ --installdeps .
 perl:
   - 5.12
   - 5.14
