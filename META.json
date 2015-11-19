@@ -48,11 +48,11 @@
             "JSON" : "2",
             "Module::Load" : "0",
             "Stream::Buffered" : "0",
-            "WWW::Form::UrlEncoded" : "0.17",
+            "WWW::Form::UrlEncoded" : "0.23",
             "perl" : "5.008005"
          },
          "suggests" : {
-            "WWW::Form::UrlEncoded::XS" : "0.17"
+            "WWW::Form::UrlEncoded::XS" : "0.23"
          }
       },
       "test" : {
@@ -77,7 +77,7 @@
          "web" : "https://github.com/kazeburo/HTTP-Entity-Parser"
       }
    },
-   "version" : "0.16",
+   "version" : "0.17",
    "x_contributors" : [
       "moznion <moznion@gmail.com>"
    ],

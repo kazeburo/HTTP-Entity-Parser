@@ -2,6 +2,10 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.17 2015-11-19T03:38:19Z
+
+   - requires WWW::Form::UrlEncoded 0.23
+
 0.16 2015-11-18T05:20:09Z
 
    - add chansen's Content-Disposition header parser and test
