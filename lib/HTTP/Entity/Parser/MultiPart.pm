@@ -98,8 +98,7 @@ sub new {
             if ( defined $disposition_filename ) {
                 $part->{filename} = $disposition_filename;
                 $self->{tempdir} ||= do {
-                    my $template = File::Spec->catdir(File::Spec->tmpdir, "HTTP-Entity-Parser-MultiPart-XXXXX");
-                    my $dir = File::Temp->newdir($template, CLEANUP => 1);
+                    my $dir = File::Temp->newdir('XXXXX', TMPDIR => 1, CLEANUP => 1);
                     # Temporary dirs will remove after the request.
                     push @{$env->{'http.entity.parser.multipart.tempdir'}}, $dir;
                     $dir;
