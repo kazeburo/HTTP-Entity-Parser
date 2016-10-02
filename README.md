@@ -5,7 +5,7 @@ HTTP::Entity::Parser - PSGI compliant HTTP Entity Parser
 # SYNOPSIS
 
     use HTTP::Entity::Parser;
-    
+
     my $parser = HTTP::Entity::Parser->new;
     $parser->register('application/x-www-form-urlencoded','HTTP::Entity::Parser::UrlEncoded');
     $parser->register('multipart/form-data','HTTP::Entity::Parser::MultiPart');
@@ -18,10 +18,10 @@ HTTP::Entity::Parser - PSGI compliant HTTP Entity Parser
 
 # DESCRIPTION
 
-HTTP::Entity::Parser is PSGI compliant HTTP Entity parser. This module also has compatibility 
-with [HTTP::Body](https://metacpan.org/pod/HTTP::Body). Unlike HTTP::Body, HTTP::Entity::Parser reads HTTP entity from 
-PSGI's env `$env->{'psgi.input'}` and parse it.
-This module support application/x-www-form-urlencoded, multipart/form-data and application/json.
+HTTP::Entity::Parser is a PSGI-compliant HTTP Entity parser. This module also is compatible
+with [HTTP::Body](https://metacpan.org/pod/HTTP::Body). Unlike HTTP::Body, HTTP::Entity::Parser reads HTTP entities from
+PSGI's environment `$env->{'psgi.input'}` and parses it.
+This module supports application/x-www-form-urlencoded, multipart/form-data and application/json.
 
 # METHODS
 
@@ -31,7 +31,7 @@ This module support application/x-www-form-urlencoded, multipart/form-data and a
 
     - buffer\_length
 
-        buffer length, HTTP::Entity::Parser read from psgi.input. 16384 by default.
+        The buffer length that HTTP::Entity::Parser reads from psgi.input. 16384 by default.
 
 - register($content\_type:String, $class:String, $opts:HashRef)
 
@@ -41,27 +41,27 @@ This module support application/x-www-form-urlencoded, multipart/form-data and a
         $parser->register('multipart/form-data','HTTP::Entity::Parser::MultiPart');
         $parser->register('application/json','HTTP::Entity::Parser::JSON');
 
-    If the request content\_type match registered type, HTTP::Entity::Parser uses registered 
+    If the request content\_type matches the registered type, HTTP::Entity::Parser uses the registered
     parser class. If content\_type does not match any registered type, HTTP::Entity::Parser::OctetStream is used.
 
 - parse($env:HashRef)
 
-    parse HTTP entity from PSGI's env.
+    parse HTTP entities from PSGI's env.
 
         my ( $params:ArrayRef, $uploads:ArrayRef) = $parser->parse($env);
 
-    `$param` is key-value pair list.
+    `$param` is a key-value pair list.
 
         my ( $params, $uploads) = $parser->parse($env);
         my $body_parameters = Hash::MultiValue->new(@$params);
 
-    `$uploads` is ArrayRef of HashRef.
+    `$uploads` is an ArrayRef of HashRef.
 
         my ( $params, $uploads) = $parser->parse($env);
         warn Dumper($uploads->[0]);
         {
             "name" => "upload", #field name
-            "headeres" => [
+            "headers" => [
                 "Content-Type" => "application/octet-stream",
                 "Content-Disposition" => "form-data; name=\"upload\"; filename=\"hello.pl\""           
             ],
@@ -70,7 +70,7 @@ This module support application/x-www-form-urlencoded, multipart/form-data and a
             "tempname" => "/tmp/XXXXX", # path to the temporary file where uploaded file is saved
         }
 
-    use with Plack::Request::Upload
+    When used with [Plack::Request::Upload](https://metacpan.org/pod/Plack::Request::Upload):
 
         my ( $params, $uploads) = $parser->parse($env);
          my $upload_hmv = Hash::MultiValue->new();
@@ -98,9 +98,9 @@ This module support application/x-www-form-urlencoded, multipart/form-data and a
 
 - JSON
 
-    For `application/json`. This parser decode JSON body automatically. 
+    For `application/json`. This parser decodes JSON body automatically.
 
-    It is convenient to use with Ajax form.
+    It is convenient to use with Ajax forms.
 
 # WHAT'S DIFFERENT FROM HTTP::Body
 
