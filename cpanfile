@@ -1,7 +1,7 @@
 requires 'perl', '5.008001';
 requires 'Stream::Buffered';
 requires 'Module::Load';
-requires 'JSON' => '2';
+requires 'JSON::MaybeXS' => '1.003007';
 requires 'Encode';
 requires 'HTTP::MultiPartParser';
 requires 'File::Temp';

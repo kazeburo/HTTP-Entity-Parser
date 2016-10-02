@@ -2,7 +2,7 @@ package HTTP::Entity::Parser::JSON;
 
 use strict;
 use warnings;
-use JSON qw//;
+use JSON::MaybeXS qw/decode_json/;
 use Encode qw/encode_utf8/;
 
 sub new {
@@ -19,7 +19,7 @@ sub add {
 sub finalize {
     my $self = shift;
 
-    my $p = JSON::decode_json($self->[0]);
+    my $p = decode_json($self->[0]);
     my @params;
     if (ref $p eq 'HASH') {
         while (my ($k, $v) = each %$p) {

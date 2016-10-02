@@ -2,7 +2,7 @@ use strict;
 use warnings;
 use Test::More;
 use HTTP::Entity::Parser::UrlEncoded;
-use JSON;
+use JSON::MaybeXS;
 
 while (<DATA>) {
     chomp;
@@ -12,7 +12,7 @@ while (<DATA>) {
     my $parser = HTTP::Entity::Parser::UrlEncoded->new();
     $parser->add($s);
     my ($params, $uploads) = $parser->finalize();
-    is JSON::encode_json($params), $t, $s;
+    is encode_json($params), $t, $s;
     is_deeply $uploads, [];
 }
 
