@@ -134,7 +134,7 @@ HTTP::Entity::Parser - PSGI compliant HTTP Entity Parser
 =head1 SYNOPSIS
 
     use HTTP::Entity::Parser;
-    
+
     my $parser = HTTP::Entity::Parser->new;
     $parser->register('application/x-www-form-urlencoded','HTTP::Entity::Parser::UrlEncoded');
     $parser->register('multipart/form-data','HTTP::Entity::Parser::MultiPart');
@@ -147,11 +147,10 @@ HTTP::Entity::Parser - PSGI compliant HTTP Entity Parser
 
 =head1 DESCRIPTION
 
-HTTP::Entity::Parser is PSGI compliant HTTP Entity parser. This module also has compatibility 
-with L<HTTP::Body>. Unlike HTTP::Body, HTTP::Entity::Parser reads HTTP entity from 
-PSGI's env C<$env-E<gt>{'psgi.input'}> and parse it.
-This module support application/x-www-form-urlencoded, multipart/form-data and application/json.
-
+HTTP::Entity::Parser is a PSGI-compliant HTTP Entity parser. This module also is compatible
+with L<HTTP::Body>. Unlike HTTP::Body, HTTP::Entity::Parser reads HTTP entities from
+PSGI's environment C<< $env->{'psgi.input'} >> and parses it.
+This module supports application/x-www-form-urlencoded, multipart/form-data and application/json.
 
 =head1 METHODS
 
@@ -165,7 +164,7 @@ Create the instance.
 
 =item buffer_length
 
-buffer length, HTTP::Entity::Parser read from psgi.input. 16384 by default.
+The buffer length that HTTP::Entity::Parser reads from psgi.input. 16384 by default.
 
 =back
 
@@ -177,27 +176,27 @@ Register parser class.
   $parser->register('multipart/form-data','HTTP::Entity::Parser::MultiPart');
   $parser->register('application/json','HTTP::Entity::Parser::JSON');
 
-If the request content_type match registered type, HTTP::Entity::Parser uses registered 
+If the request content_type matches the registered type, HTTP::Entity::Parser uses the registered
 parser class. If content_type does not match any registered type, HTTP::Entity::Parser::OctetStream is used.
 
 =item parse($env:HashRef)
 
-parse HTTP entity from PSGI's env.
+parse HTTP entities from PSGI's env.
 
   my ( $params:ArrayRef, $uploads:ArrayRef) = $parser->parse($env);
 
-C<$param> is key-value pair list.
+C<$param> is a key-value pair list.
 
    my ( $params, $uploads) = $parser->parse($env);
    my $body_parameters = Hash::MultiValue->new(@$params);
 
-C<$uploads> is ArrayRef of HashRef.
+C<$uploads> is an ArrayRef of HashRef.
 
    my ( $params, $uploads) = $parser->parse($env);
    warn Dumper($uploads->[0]);
    {
        "name" => "upload", #field name
-       "headeres" => [
+       "headers" => [
            "Content-Type" => "application/octet-stream",
            "Content-Disposition" => "form-data; name=\"upload\"; filename=\"hello.pl\""           
        ],
@@ -206,7 +205,7 @@ C<$uploads> is ArrayRef of HashRef.
        "tempname" => "/tmp/XXXXX", # path to the temporary file where uploaded file is saved
    }
 
-use with Plack::Request::Upload
+When used with L<Plack::Request::Upload>:
 
    my ( $params, $uploads) = $parser->parse($env);
     my $upload_hmv = Hash::MultiValue->new();
@@ -238,9 +237,9 @@ MultiPart parser use L<HTTP::MultiPartParser>.
 
 =item JSON
 
-For C<application/json>. This parser decode JSON body automatically. 
+For C<application/json>. This parser decodes JSON body automatically.
 
-It is convenient to use with Ajax form.
+It is convenient to use with Ajax forms.
 
 =back
 

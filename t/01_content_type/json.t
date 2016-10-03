@@ -3,6 +3,7 @@ use warnings;
 use Test::More;
 use HTTP::Entity::Parser::JSON;
 use Hash::MultiValue;
+use utf8;
 
 my $parser = HTTP::Entity::Parser::JSON->new();
 $parser->add('{');
@@ -16,7 +17,7 @@ is_deeply(Hash::MultiValue->new(@$params)->as_hashref_multi,
   +{
     'hoge'     => [ 'fuga', 'hige' ],
     'moge'     => ['muga'],
-    'にほんご' => ['日本語'],
+    Encode::encode_utf8('にほんご') => [Encode::encode_utf8('日本語')],
   });
 is_deeply $uploads, [];
 

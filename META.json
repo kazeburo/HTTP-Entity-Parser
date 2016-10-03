@@ -4,13 +4,13 @@
       "Masahiro Nagano <kazeburo@gmail.com>"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Minilla/v2.4.1, CPAN::Meta::Converter version 2.150005",
+   "generated_by" : "Minilla/v3.0.4, CPAN::Meta::Converter version 2.150010",
    "license" : [
       "perl_5"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
-      "version" : "2"
+      "version" : 2.0
    },
    "name" : "HTTP-Entity-Parser",
    "no_index" : {
@@ -28,7 +28,7 @@
    "prereqs" : {
       "configure" : {
          "requires" : {
-            "Module::Build" : "0.38"
+            "Module::Build::Tiny" : "0.035"
          }
       },
       "develop" : {
@@ -45,7 +45,8 @@
             "Encode" : "0",
             "File::Temp" : "0",
             "HTTP::MultiPartParser" : "0",
-            "JSON" : "2",
+            "Hash::MultiValue" : "0",
+            "JSON::MaybeXS" : "1.003007",
             "Module::Load" : "0",
             "Stream::Buffered" : "0",
             "WWW::Form::UrlEncoded" : "0.23",
@@ -60,7 +61,6 @@
             "Cwd" : "0",
             "File::Spec::Functions" : "0",
             "HTTP::Message" : "6",
-            "Hash::MultiValue" : "0",
             "Test::More" : "0.98"
          }
       }
@@ -79,7 +79,8 @@
    },
    "version" : "0.17",
    "x_contributors" : [
-      "moznion <moznion@gmail.com>"
+      "moznion <moznion@gmail.com>",
+      "Karen Etheridge <ether@cpan.org>"
    ],
-   "x_serialization_backend" : "JSON::PP version 2.27203"
+   "x_serialization_backend" : "JSON::MaybeXS version 1.003007"
 }
