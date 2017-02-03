@@ -4,7 +4,8 @@ use Test::More;
 use HTTP::Entity::Parser::MultiPart;
 use Hash::MultiValue;
 use HTTP::Headers;
-use t::Util;
+require "./t/Util.pm";
+t::Util->import();
 use File::Basename;
 
 my $content = qq{------BOUNDARY
