@@ -2,6 +2,10 @@ Revision history for Perl extension HTTP-Entity-Parser
 
 {{$NEXT}}
 
+0.19 2017-02-07T08:19:45Z
+
+   - Adjust tests for module load from a relative path when . is not in @INC (Thank you toddr)
+
 0.18 2016-10-03T04:36:04Z
 
    - Use a better tempdir, fix some documentation, and make json test more readable #4 (Thank you karenetheridge)

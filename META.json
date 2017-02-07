@@ -77,10 +77,11 @@
          "web" : "https://github.com/kazeburo/HTTP-Entity-Parser"
       }
    },
-   "version" : "0.18",
+   "version" : "0.19",
    "x_contributors" : [
       "moznion <moznion@gmail.com>",
-      "Karen Etheridge <ether@cpan.org>"
+      "Karen Etheridge <ether@cpan.org>",
+      "Todd Rinaldo <toddr@cpan.org>"
    ],
    "x_serialization_backend" : "JSON::PP version 2.27400"
 }
