@@ -4,7 +4,7 @@ use Test::More;
 use HTTP::Entity::Parser::MultiPart;
 use Hash::MultiValue;
 use HTTP::Headers;
-use t::Util;
+require "./t/Util.pm";
 use File::Basename;
 
 

@@ -1,7 +1,8 @@
 use strict;
 use warnings;
 use Test::More;
-use t::Util;
+require "./t/Util.pm";
+t::Util->import();
 use HTTP::Entity::Parser;
 use Cwd;
 use File::Spec::Functions;
