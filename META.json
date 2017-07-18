@@ -77,7 +77,7 @@
          "web" : "https://github.com/kazeburo/HTTP-Entity-Parser"
       }
    },
-   "version" : "0.19",
+   "version" : "0.20",
    "x_contributors" : [
       "Karen Etheridge <ether@cpan.org>",
       "Todd Rinaldo <toddr@cpan.org>",
