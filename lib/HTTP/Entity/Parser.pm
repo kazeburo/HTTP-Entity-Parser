@@ -94,8 +94,14 @@ sub parse {
     elsif ($chunked) {
         my $chunk_buffer = '';
         my $length;
+        my $spin = 0;
         DECHUNK: while(1) {
             $input->read(my $chunk, $buffer_length);
+            my $read = length $chunk;
+            if ($read == 0 ) {
+                Carp::croak "Malformed chunked request" if $spin++ > 2000;
+                next;
+            }
             $chunk_buffer .= $chunk;
             while ( $chunk_buffer =~ s/^(([0-9a-fA-F]+).*\015\012)// ) {
                 my $trailer   = $1;
