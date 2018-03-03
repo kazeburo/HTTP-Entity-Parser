@@ -50,7 +50,7 @@
             "Module::Load" : "0",
             "Stream::Buffered" : "0",
             "WWW::Form::UrlEncoded" : "0.23",
-            "perl" : "5.008005"
+            "perl" : "5.008001"
          },
          "suggests" : {
             "WWW::Form::UrlEncoded::XS" : "0.23"
@@ -80,6 +80,7 @@
    "version" : "0.20",
    "x_contributors" : [
       "Karen Etheridge <ether@cpan.org>",
+      "Shoichi Kaji <skaji@cpan.org>",
       "Todd Rinaldo <toddr@cpan.org>",
       "moznion <moznion@gmail.com>"
    ],
