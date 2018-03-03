@@ -6,7 +6,7 @@ use warnings;
 use Stream::Buffered;
 use Module::Load;
 
-our $VERSION = "0.20";
+our $VERSION = "0.21";
 
 our $BUFFER_LENGTH = 65536;
 
