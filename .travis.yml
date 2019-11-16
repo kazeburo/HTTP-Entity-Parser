@@ -1,3 +1,4 @@
+dist: bionic
 language: perl
 perl:
   - 5.12
@@ -6,4 +7,3 @@ perl:
   - 5.18
   - 5.20
   - 5.22
-

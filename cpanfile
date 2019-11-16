@@ -9,8 +9,6 @@ requires 'WWW::Form::UrlEncoded', '0.23';
 suggests 'WWW::Form::UrlEncoded::XS', '0.23';
 requires 'Hash::MultiValue';
 
-configure_requires 'Module::Build::Tiny' => '0.039';
-
 on 'test' => sub {
     requires 'Test::More', '0.98';
     requires 'File::Spec::Functions';
