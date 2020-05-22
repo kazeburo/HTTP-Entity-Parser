@@ -25,7 +25,8 @@ sub finalize {
         while (my ($k, $v) = each %$p) {
             if (ref $v eq 'ARRAY') {
                 for (@$v) {
-                    push @params, encode_utf8($k), encode_utf8($_);
+                    push @params, encode_utf8($k) => ref($_) ? $_
+                                                             : encode_utf8($_);
                 }
             } elsif (ref $v) {
                 push @params, encode_utf8($k), $v;
