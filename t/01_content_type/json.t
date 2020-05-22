@@ -15,13 +15,13 @@ $parser->add('"moge":"muga"');
 $parser->add('}');
 
 my ($params, $uploads) = $parser->finalize();
-is_deeply(Hash::MultiValue->new(@$params)->as_hashref_multi,
+is_deeply(Hash::MultiValue->new(@$params)->as_hashref_mixed,
   +{
     'hoge'     => [ 'fuga', 'hige' ],
-    'moge'     => ['muga'],
-    'moji'     => [ { 'kanji' => { 'ji' => '字' } } ],
+    'moge'     => 'muga',
+    'moji'     => { 'kanji' => { 'ji' => '字' } },
     'shallow'  => [ { 'deeper' => 'sunk' } ],
-    Encode::encode_utf8('にほんご') => [Encode::encode_utf8('日本語')],
+    Encode::encode_utf8('にほんご') => Encode::encode_utf8('日本語'),
   });
 is_deeply $uploads, [];
 
