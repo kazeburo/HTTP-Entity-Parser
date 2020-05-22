@@ -10,6 +10,7 @@ $parser->add('{');
 $parser->add('"hoge":["fuga","hige"],');
 $parser->add('"moji":{"kanji":{"ji":"\u5b57"}},');
 $parser->add('"\u306b\u307b\u3093\u3054":"\u65e5\u672c\u8a9e",');
+$parser->add('"shallow":[{"deeper": "sunk"}],');
 $parser->add('"moge":"muga"');
 $parser->add('}');
 
@@ -19,6 +20,7 @@ is_deeply(Hash::MultiValue->new(@$params)->as_hashref_multi,
     'hoge'     => [ 'fuga', 'hige' ],
     'moge'     => ['muga'],
     'moji'     => [ { 'kanji' => { 'ji' => '字' } } ],
+    'shallow'  => [ { 'deeper' => 'sunk' } ],
     Encode::encode_utf8('にほんご') => [Encode::encode_utf8('日本語')],
   });
 is_deeply $uploads, [];
