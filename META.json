@@ -77,7 +77,7 @@
          "web" : "https://github.com/kazeburo/HTTP-Entity-Parser"
       }
    },
-   "version" : "0.22",
+   "version" : "0.23",
    "x_contributors" : [
       "José Joaquín Atria <jjatria@gmail.com>",
       "Karen Etheridge <ether@cpan.org>",
