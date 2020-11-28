@@ -44,11 +44,7 @@ sub parse {
     my ($self, $env) = @_;
 
     my $buffer_length = $self->[1];
-    my $ct = $env->{CONTENT_TYPE};
-    if (!$ct) {
-        # No Content-Type
-        return ([], []);
-    }
+    my $ct = $env->{CONTENT_TYPE} || '';
 
     my $parser;
     for my $handler (@{$self->[0]}) {
